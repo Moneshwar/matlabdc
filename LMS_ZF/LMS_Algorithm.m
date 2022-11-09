@@ -1,0 +1,37 @@
+clc;
+clear all;
+close all;
+N=input('Length of Sequence N= ');
+t=[0:N-1];
+wo=0.01;
+phi=0.1;
+d=sin(2*pi*[1:N]*wo+phi);
+x=d+randn(1,N)*0.5;
+h=zeros(1,N);
+mu=input('mu = ');
+k=10*N;
+while k>0
+    e=d-h.*x;
+    temp=h;
+    h=temp+mu*e.*x;
+    k=k-1;
+end
+yd=h.*x;
+subplot(2,2,1);
+plot(t,d);
+title('Input Signal');
+ylim([-1.5 1.5]);
+grid on;
+subplot(2,2,2);
+plot(t,x);
+title('Input Signal with Noise');
+grid on;
+subplot(2,2,3);
+plot(t,e);
+title('Error Signal');
+grid on;
+subplot(2,2,4);
+plot(t,yd);
+title('Retriveved Signal');
+ylim([-1.5 1.5]);
+grid on;
